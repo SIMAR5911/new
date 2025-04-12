@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Expense = require('../models/Expense');
 
-// GET all expenses
 router.get('/', (req, res) => {
   Expense.find()
     .then(expenses => {
@@ -11,7 +10,6 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).send(err.message));
 });
 
-// Create new expense
 router.get('/create', (req, res) => {
   res.render('expenses/create');
 });
@@ -25,7 +23,6 @@ router.post('/create', (req, res) => {
     .catch(err => res.status(500).send(err.message));
 });
 
-// Delete expense
 router.post('/delete/:id', (req, res) => {
   Expense.findByIdAndDelete(req.params.id)
     .then(() => res.redirect('/expenses'))
